@@ -2,5 +2,4 @@
 ARG METRICS_TAG
 FROM ghcr.io/lowlighter/metrics:${METRICS_TAG}
 COPY source/app/action/index.mjs /metrics/source/app/action/index.mjs
-COPY source/plugins/achievements /metrics/source/plugins/achievements
-COPY source/plugins/traffic /metrics/source/plugins/traffic
+COPY source/plugins /metrics/source/plugins
