@@ -1556,6 +1556,8 @@ runs:
         else
           echo "Using a forked version"
           METRICS_IMAGE=metrics:forked-$METRICS_VERSION
+          # The upstream Dockerfile no longer builds, so layer the patched sources on the released image
+          METRICS_DOCKERFILE=Dockerfile.fork
         fi
         echo "Image name: $METRICS_IMAGE"
 
@@ -1566,7 +1568,7 @@ runs:
         set -e
         if [[ "$METRICS_IMAGE_NEEDS_BUILD" -gt "0" ]]; then
           echo "Image $METRICS_IMAGE is not present locally, rebuilding it from Dockerfile"
-          docker build -t $METRICS_IMAGE .
+          docker build --build-arg METRICS_TAG=$METRICS_TAG -f ${METRICS_DOCKERFILE:-Dockerfile} -t $METRICS_IMAGE .
         else
           echo "Image $METRICS_IMAGE is present locally"
         fi

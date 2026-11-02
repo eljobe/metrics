@@ -1,0 +1,4 @@
+# Released upstream image with this fork's patched action entrypoint on top
+ARG METRICS_TAG
+FROM ghcr.io/lowlighter/metrics:${METRICS_TAG}
+COPY source/app/action/index.mjs /metrics/source/app/action/index.mjs
